@@ -33,10 +33,17 @@ export default {
     this.fetchBookings();
 
     eventBus.$on('submit-booking', payload => {
-      console.log("KJAGSKJASKJAHS", payload);
       BookingService.postBooking(payload)
       .then(booking => this.bookings.push(booking));
     })
+
+    eventBus.$on('delete-booking', id => {
+      BookingService.deleteBooking(id)
+        .then(() => {
+          const index = this.bookings.findIndex(booking => booking._id === id);
+          this.bookings.splice(index, 1);
+        });
+    });
 
   }
 }

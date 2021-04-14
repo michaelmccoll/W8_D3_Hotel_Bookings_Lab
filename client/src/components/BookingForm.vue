@@ -24,7 +24,7 @@ export default {
     return {
         name: '',
         email: '',
-        checked_in_status: false
+        check_in_status: true
         
     }
     },
@@ -33,7 +33,7 @@ export default {
             const payload = {
                 name: this.name,
                 email: this.email,
-                checked_in_status: this.checked_in_status
+                check_in_status: this.check_in_status
             };
             eventBus.$emit('submit-booking',payload);
         }
