@@ -37,6 +37,11 @@ export default {
       .then(booking => this.bookings.push(booking));
     })
 
+    eventBus.$on('update-booking', payload => {
+      BookingService.updateBooking(payload)
+      .then(booking => this.bookings.push(booking));
+    })
+
     eventBus.$on('delete-booking', id => {
       BookingService.deleteBooking(id)
         .then(() => {
