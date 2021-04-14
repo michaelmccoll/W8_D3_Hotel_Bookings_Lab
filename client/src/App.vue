@@ -1,18 +1,46 @@
 <template>
   <div id="app">
-    
+    <booking-form/>
+    <h1>Hotel Bookings</h1>
+    <booking-list :bookings="bookings"/>
   </div>
 </template>
 
 <script>
-
+import {eventBus} from './main.js';
+import BookingForm from './components/BookingForm.vue';
+import BookingList from './components/BookingList.vue';
+import BookingService from './services/BookingService.js';
 
 export default {
   name: 'App',
   components: {
-    
+    'booking-form': BookingForm,
+    'booking-list': BookingList
+  },
+  data(){
+    return {
+    bookings: []
+  };
+  },
+  methods: {
+    fetchBookings(){
+      BookingService.getBookings()
+      .then(bookings => this.bookings = bookings);
+    }
+  },
+  mounted(){
+    this.fetchBookings();
+
+    eventBus.$on('submit-booking', payload => {
+      console.log("KJAGSKJASKJAHS", payload);
+      BookingService.postBooking(payload)
+      .then(booking => this.bookings.push(booking));
+    })
+
   }
 }
+
 </script>
 
 <style>
