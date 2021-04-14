@@ -2,12 +2,12 @@
   <form class="" v-on:submit="addBooking" id="booking-form">
       <h2>Add a Booking</h2>
       <label for="name">Name:</label>
-      <input type="text" id="name" v-model="name"/>
+      <input type="text" id="name" v-model="name" required/>
 
       <label for="email">Email:</label>
-      <input type="text" id="email" v-model="email"/>
+      <input type="email" id="email" v-model="email" required/>
 
-      <input type="submit" value="Save" id="save"/>
+      <input type="submit" value="Check In" id="save"/>
 
   </form>
 
