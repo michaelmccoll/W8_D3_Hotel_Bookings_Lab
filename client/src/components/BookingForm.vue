@@ -1,14 +1,13 @@
 <template>
-  <form class="" v-on:submit="addBooking" id="booking-form">
+  <form class="form" v-on:submit="addBooking" id="booking-form">
       <h2>Add a Booking</h2>
-      <label for="name">Name:</label>
-      <input type="text" id="name" v-model="name" required/>
+        <label for="name">Name:</label>
+        <input class="name" type="text" id="name" v-model="name" required/>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" v-model="email" required/>
+        <label for="email">Email:</label>
+        <input class="email" type="email" id="email" v-model="email" required/>
 
-      <input type="submit" value="Check In" id="save"/>
-
+        <input type="submit" value="Check In" id="save"/>
   </form>
 
 </template>
@@ -16,7 +15,6 @@
 <script>
 
 import {eventBus} from '../main.js'
-// import BookingService from './services/BookingService.vue'
 
 export default {
     name: 'booking-form',
@@ -25,7 +23,6 @@ export default {
         name: '',
         email: '',
         check_in_status: true
-        
     }
     },
     methods: {
@@ -42,5 +39,15 @@ export default {
 </script>
 
 <style>
+input {
+    padding: 8px;
+    margin: 8px;
+}
+.email {
+    width: 250px;
+}
+.name {
+    width: 180px;
+}
 
 </style>

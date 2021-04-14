@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <booking-form/>
-    <h1>Hotel Bookings</h1>
+    <header>
+      <booking-form/>
+      <hr>
+    </header>
+    <h1>Hotel Bookings List</h1>
     <booking-list :bookings="bookings"/>
   </div>
 </template>
@@ -62,6 +65,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
+}
+header {
+  background-color: lightgrey;
+  padding: 10px 0px 0px 0px;
+}
+h1 {
+  padding: 5px;
+  margin: 5px;
 }
 </style>

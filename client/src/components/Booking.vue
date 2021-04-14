@@ -1,11 +1,16 @@
 <template>
-  <div>
-      <h2>Name: {{booking.name}}</h2>
-      <h3>Email: {{booking.email}}</h3>
-      <h3>Check-in Status: {{booking.check_in_status}}</h3>
-      <button v-on:click="deleteBooking(booking._id)">Delete Booking</button>
-      <button v-on:click="updateBooking(booking._id)">Update Check In/Out</button>
-  </div>
+      <tr>
+          <td class="nameEntry">{{booking.name}}</td>
+          <td>{{booking.email}}</td>
+          <td v-bind:class="booking.check_in_status ? 'checkedin' : 'checkedout'">{{booking.check_in_status}}</td>
+          <td>
+            <button v-on:click="deleteBooking(booking._id)">Delete Booking</button>
+          </td>
+          <td>
+            <button v-on:click="updateBooking(booking)">Update Check In/Out</button>
+            <!-- booking.check_in_status=!booking.check_in_status -->
+          </td>
+        </tr>
 </template>
 
 <script>
@@ -19,13 +24,29 @@ export default {
         deleteBooking(id){
             eventBus.$emit('delete-booking',id);
         },
-        updateBooking(id){
-            eventBus.$emit('update-booking',id);
+        updateBooking(booking){
+            const payload = {
+                name: booking.name,
+                email: booking.email,
+                check_in_status: !booking.check_in_status
+            }
+            eventBus.$emit('update-booking',payload);
         }
     }
 }
 </script>
 
 <style>
-
+td {
+    padding: 10px;
+    background-color: rgb(193, 227, 238);
+}
+.checkedin {
+    color: white;
+    background-color: rgb(110, 165, 110);
+}
+.checkedout {
+    color:black;
+    background-color: rgb(230, 102, 102);
+}
 </style>
