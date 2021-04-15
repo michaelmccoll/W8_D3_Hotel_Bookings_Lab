@@ -7,7 +7,7 @@
             <button v-on:click="deleteBooking(booking._id)">Delete Booking</button>
           </td>
           <td>
-            <button v-on:click="updateBooking(booking)">Update Check In/Out</button>
+            <button v-on:click="updateBooking">Update Check In/Out</button>
             <!-- booking.check_in_status=!booking.check_in_status -->
           </td>
         </tr>
@@ -24,13 +24,8 @@ export default {
         deleteBooking(id){
             eventBus.$emit('delete-booking',id);
         },
-        updateBooking(booking){
-            const payload = {
-                name: booking.name,
-                email: booking.email,
-                check_in_status: !booking.check_in_status
-            }
-            eventBus.$emit('update-booking',payload);
+        updateBooking: function(){
+            eventBus.$emit('update-booking',this.booking);
         }
     }
 }

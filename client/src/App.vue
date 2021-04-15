@@ -38,12 +38,17 @@ export default {
     eventBus.$on('submit-booking', payload => {
       BookingService.postBooking(payload)
       .then(booking => this.bookings.push(booking));
-    })
+    });
 
-    eventBus.$on('update-booking', payload => {
-      BookingService.updateBooking(payload)
-      .then(booking => this.bookings.push(booking));
-    })
+    eventBus.$on('update-booking', booking => {
+      const updateBooking = {
+        ...booking,
+        check_in_status: !booking.check_in_status
+      };
+      BookingService.updateBooking(updateBooking);
+      const index = this.bookings.findIndex(booking => booking._id === updateBooking._id);
+      this.bookings.splice(index,1,updateBooking);
+    });
 
     eventBus.$on('delete-booking', id => {
       BookingService.deleteBooking(id)
